@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Data Website</title>
+    <link rel="stylesheet" href="styleecg.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Remote Patient Heart Monitoring!</h1>
+    </header>
+    <main>
+        <nav> 
+            <a href="#">Home</a> &nbsp; 
+            <a href="#" onclick="openProductPage()">Products</a> &nbsp;
+            <a href="#" onclick="displayAboutUs()">About us</a>
+        </nav>
+        <br>
+        <hr>
+        <br>
+          
+        <section>  
+            <form>
+              <h2>Enter Patient Device ID</h2>
+              <input type="number" id="patientID" name="patientID" required>
+              <br><br>
+              <input type="button" value="Go" onclick="goToUbidots()">
+            </form>
+            <br>
+        </section>
+        <hr>
+          
+        <script>
+            function goToUbidots() {
+                var patientID = document.getElementById("patientID").value;
+                if (patientID === "1234") { // Replace "1234" with the desired Patient Device ID
+                    window.location.href = "http://10.1.148.130/";
+                } else {
+                    alert("Invalid Patient Device ID. Please enter the correct Patient Device ID.");
+                }
+            }
+            function openProductPage() {
+                window.location.href = "comingsoon.html";
+            }
+            function displayAboutUs() {
+                var aboutUs = document.getElementById("aboutUs");
+                aboutUs.style.display = "block";
+            }
+        </script>
+          
+        <section id="aboutUs" style="display:none;">
+            <h2>Our Team</h2>
+            <ul>
+                <li>Anvay Parwekar (Instrumentation and Control)</li>
+                <li>Aaradhya Nachankar (Instrumentation and Control)</li>
+                <li>Abhishek Dixit (Instrumentation and Control)</li>
+            </ul>
+            <p>
+                This team is working hard to make a low-cost, high-accuracy heart monitoring system which will be very helpful for heart patients to easily check ECG, heart rate, and diagnose any heart-related disease. Hope we will come up with this product soon.
+            </p>
+        </section>
+        
+        <section>
+            <h2> Useful Videos </h2>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/RYZ4daFwMa8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" width="100%" ></iframe>
+            
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/deEiRCvekTU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" width="100%"></iframe>
+            <br>
+            <br>
+
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/iT3cVVK74tU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" width="100%"></iframe>
+        </section>
+        
+        <section>
+            <h2>Contact Me</h2>
+            <form>
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name"><br>
+              <label for="email">Email:</label>
+          <input type="email" id="email" name="email"><br>
+
+          <label for="message">Message:</label>
+          <textarea id="message" name="message"></textarea><br>
+
+          <input type="submit" value="Submit">
+        </form>
+      </section>
+    </main>
+    </body>
+    </html>

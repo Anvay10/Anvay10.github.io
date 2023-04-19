@@ -1,8 +1,39 @@
-var socket = io.connect('http://localhost:3000');
-socket.on('connect', function() {
-  console.log('Connected to server');
+var ctx = document.getElementById('ecgChart').getContext('2d');
+
+var chart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: Array.from(Array(400).keys()),
+    datasets: [{
+      label: 'ECG Data',
+      data: [],
+      fill: false,
+      borderColor: 'rgb(255, 99, 132)',
+      tension: 0.1
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
 });
 
-socket.on('ecg_data', function(data) {
-  // Do something with the ECG data
-});
+function updateChart() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var ecgData = this.responseText.trim().split(', ');
+      chart.data.datasets[0].data = ecgData;
+      chart.update();
+    }
+  };
+  xhttp.open("GET", "/ecg", true);
+  xhttp.send();
+}
+
+setInterval(updateChart, 10);

@@ -8,7 +8,7 @@ var chart = new Chart(ctx, {
       label: 'ECG Data',
       data: [],
       fill: false,
-      borderColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(0,255,0)',
       tension: 0.1
     }]
   },

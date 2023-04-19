@@ -5,7 +5,6 @@ body{
 h1{
     font-family: 'Times New Roman', Times, serif;
     color: rgb(214, 223, 170);
-    background-color: rgb(14, 14, 13);
     text-align: center;
 }
 a{
@@ -17,7 +16,7 @@ a:hover {
   }
 
 html{
-    background-color: rgb(255, 255, 255);
+    
     text-align: center;
 }
 h2{
@@ -32,7 +31,7 @@ nav{
     font-size: 200%;
     text-align: center;
     padding: 50px;
-    background-color: rgb(99, 96, 91);
+    
     
 }
 form{
@@ -54,7 +53,7 @@ form{
   h1 {
     font-family: 'Times New Roman', Times, serif;
     color: rgb(214, 223, 170);
-    background-color: rgb(14, 14, 13);
+    
     text-align: center;
     margin: 0;
     padding: 20px;
@@ -64,7 +63,7 @@ form{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 200%;
     text-align: center;
-    background-color: rgb(99, 96, 91);
+   
     margin-bottom: 30px;
   }
   
@@ -112,16 +111,16 @@ form{
   .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: rgb(233, 215, 170);
+    
     color: #222;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    
   }
   
   .btn:hover {
-    background-color: #222;
+    
     color: rgb(233, 215, 170);
   }
   

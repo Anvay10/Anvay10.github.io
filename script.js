@@ -5,7 +5,7 @@ const ecgChart = new Chart(document.getElementById("ecgChart"), {
     datasets: [{
       label: 'ECG Data',
       data: [],
-      borderColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 255, 255)',
       fill: false
     }]
   },

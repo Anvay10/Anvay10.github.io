@@ -111,6 +111,22 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    
+    <button onclick="showChart()">Show Chart</button>
+
+<script>
+function showChart() {
+  fetch("/chart")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("chartContainer").innerHTML = data;
+    });
+}
+</script>
+
+<div id="chartContainer"></div>
+
+    
   <canvas id="ecgChart"></canvas>
   <script>
     var ecgChart = new Chart(document.getElementById("ecgChart"), {

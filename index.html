@@ -1,11 +1,10 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real-time ECG Chart</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <link rel="stylesheet" href="styleecg.css">
     <style>
@@ -30,7 +29,7 @@
         <hr>
         <br>
           
-         <canvas id="ecgChart"></canvas>
+         <canvas id="myChart"></canvas>
         
         
         
@@ -102,83 +101,7 @@
       </section>
     </main>
     </body>
-    </html> -->
+    </html>
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>ECG Chart</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    
-    <button onclick="showChart()">Show Chart</button>
-
-<script>
-function showChart() {
-  fetch("/chart")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("chartContainer").innerHTML = data;
-    });
-}
-</script>
-
-<div id="chartContainer"></div>
-
-    
-  <canvas id="ecgChart"></canvas>
-  <script>
-    var ecgChart = new Chart(document.getElementById("ecgChart"), {
-      type: 'line',
-      data: {
-        labels: [],
-        datasets: [{
-          label: "ECG Data",
-          data: [],
-          fill: false,
-          borderColor: "rgb(75, 192, 192)",
-          lineTension: 0.1
-        }]
-      },
-      options: {
-        responsive: true,
-        title: {
-          display: true,
-          text: 'ECG Data'
-        },
-        scales: {
-          xAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'Time'
-            }
-          }],
-          yAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'Voltage (mV)'
-            }
-          }]
-        }
-      }
-    });
-
-    function addDataToChart(data) {
-      var time = new Date().toLocaleTimeString();
-      ecgChart.data.labels.push(time);
-      ecgChart.data.datasets[0].data.push(data);
-      ecgChart.update();
-    }
-
-    var ws = new WebSocket("ws://" + window.location.hostname + ":81/");
-    ws.onmessage = function(event) {
-      addDataToChart(parseInt(event.data));
-    };
-  </script>
-</body>
-</html>
 
 

@@ -24,7 +24,7 @@ const chartConfig = {
           refresh: 1000, // Refresh rate in milliseconds
           delay: 1000, // Delay between the time an update is received and when it is displayed
           onRefresh: function(chart) { // Callback function for updating the chart data
-            fetch('/ecg_data')
+            fetch('http://10.100.105.64/ecg_data')
               .then(response => response.json())
               .then(data => {
                 const timestamp = Date.now();

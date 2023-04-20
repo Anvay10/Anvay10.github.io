@@ -1,39 +1,54 @@
-var ctx = document.getElementById('ecgChart').getContext('2d');
-
-var chart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: Array.from(Array(400).keys()),
-    datasets: [{
-      label: 'ECG Data',
-      data: [],
-      fill: false,
-      borderColor: 'rgb(0,255,0)',
-      tension: 0.1
-    }]
-  },
-  options: {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true
-        }
-      }]
-    }
-  }
+const ecgChart = new Chart(document.getElementById('ecgChart'), {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'ECG',
+            data: [],
+            backgroundColor: 'rgba(0, 0, 255, 0.5)',
+            borderColor: 'rgba(0, 0, 255, 1)',
+            borderWidth: 1,
+            fill: false,
+        }],
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+            duration: 0,
+        },
+        scales: {
+            xAxes: [{
+                display: false,
+            }],
+            yAxes: [{
+                ticks: {
+                    suggestedMax: 1023,
+                    suggestedMin: 0,
+                },
+            }],
+        },
+    },
 });
 
-function updateChart() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      var ecgData = this.responseText.trim().split(', ');
-      chart.data.datasets[0].data = ecgData;
-      chart.update();
+const ecgData = [];
+
+function updateChart(jsonData) {
+    const data = JSON.parse(jsonData).data;
+
+    for (let i = 0; i < data.length; i++) {
+        ecgData.push(data[i]);
+
+        if (ecgData.length > 400) {
+            ecgData.shift();
+        }
     }
-  };
-  xhttp.open("GET", "/ecg", true);
-  xhttp.send();
+
+    ecgChart.data.datasets[0].data = ecgData;
+    ecgChart.update();
 }
 
-setInterval(updateChart, 10);
+const source = new EventSource('/events');
+source.addEventListener('data', (event) => {
+    updateChart(event.data);
+});

@@ -34,7 +34,7 @@ const ecgChart = new Chart(document.getElementById("ecgChart"), {
   }
 });
 
-const webSocket = new WebSocket('ws://10.100.105.64');
+const webSocket = new WebSocket('ws://10.100.111.152');
 
 webSocket.onmessage = (event) => {
   const ecgValue = event.data;

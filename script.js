@@ -24,7 +24,7 @@ var ecgChart = new Chart(ctx, {
 });
 
 // Set up WebSocket connection
-var socket = new WebSocket('ws://YOUR_IP_ADDRESS:YOUR_PORT_NUMBER');
+var socket = new WebSocket('ws://10.100.105.0:80');
 
 // When the connection is open, send a message to the server to request ECG data
 socket.onopen = function(event) {

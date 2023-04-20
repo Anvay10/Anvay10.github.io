@@ -1,48 +1,56 @@
-const ecgChart = new Chart(document.getElementById("ecgChart"), {
-  type: 'line',
-  data: {
-    labels: [],
-    datasets: [{
-      label: 'ECG Data',
-      data: [],
-      borderColor: 'rgb(127, 127, 127)',
-      fill: false
-    }]
-  },
-  options: {
-    responsive: true,
-    title: {
-      display: true,
-      text: 'ECG Data Chart'
+var ecgChart;
+
+function initChart() {
+  // Initialize the chart with empty data
+  var ctx = document.getElementById('ecgChart').getContext('2d');
+  ecgChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'ECG Data',
+        data: [],
+        fill: false,
+        borderColor: 'rgb(255, 99, 132)',
+        tension: 0.1
+      }]
     },
-    scales: {
-        x: {
-            display: true,
-            title: {
-                display: true,
-                text: 'Time'
-            }
-        },
-        y: {
-            display: true,
-            title: {
-                display: true,
-                text: 'ECG Value'
-            },
-            suggestedMin: -0.5,
-            suggestedMax: 1.5
-        }
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
     }
-  }
+  });
+}
+
+function updateChart() {
+  // Send a request to the server for the latest ECG data
+  var request = new XMLHttpRequest();
+  request.open('GET', '/data', true);
+  request.onload = function() {
+    if (request.status == 200) {
+      // Parse the response and update the chart
+      var ecgData = JSON.parse(request.responseText);
+      for (var i = 0; i < ecgData.length; i++) {
+        ecgChart.data.datasets[0].data.push(ecgData[i]);
+        ecgChart.data.labels.push('');
+      }
+      ecgChart.update();
+    }
+  };
+  request.send();
+}
+
+// Initialize the chart when the page is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  initChart();
 });
 
-const webSocket = new WebSocket('wss://10.100.111.152');
-
-webSocket.onmessage = (event) => {
-  const ecgValue = event.data;
-  const time = new Date().toLocaleTimeString();
-
-  ecgChart.data.labels.push(time);
-  ecgChart.data.datasets[0].data.push(ecgValue);
-  ecgChart.update();
-};
+// Update the chart every 100 ms
+setInterval(function() {
+  updateChart();
+}, 100);

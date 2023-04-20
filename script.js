@@ -16,25 +16,27 @@ const ecgChart = new Chart(document.getElementById("ecgChart"), {
       text: 'ECG Data Chart'
     },
     scales: {
-      xAxes: [{
-        display: true,
-        scaleLabel: {
-          display: true,
-          labelString: 'Time'
+        x: {
+            display: true,
+            title: {
+                display: true,
+                text: 'Time'
+            }
+        },
+        y: {
+            display: true,
+            title: {
+                display: true,
+                text: 'ECG Value'
+            },
+            suggestedMin: -0.5,
+            suggestedMax: 1.5
         }
-      }],
-      yAxes: [{
-        display: true,
-        scaleLabel: {
-          display: true,
-          labelString: 'ECG Value'
-        }
-      }]
     }
   }
 });
 
-const webSocket = new WebSocket('ws://10.100.111.152');
+const webSocket = new WebSocket('wss://10.100.111.152');
 
 webSocket.onmessage = (event) => {
   const ecgValue = event.data;

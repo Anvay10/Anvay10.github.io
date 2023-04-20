@@ -33,7 +33,7 @@ function updateChart() {
       myChart.update();
     }
   };
-  xhttp.open("GET", "/ecgData", true);
+  xhttp.open("GET", "http://10.100.105.0/ecgData", true);
   xhttp.send();
 }
 
